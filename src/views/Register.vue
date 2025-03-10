@@ -3,7 +3,7 @@
     <div class="card">
       <h2>用户注册</h2>
       <el-form
-        ref="registerForm"
+        ref="registerFormRef"
         :model="registerForm"
         :rules="rules"
         label-width="80px"
@@ -50,7 +50,7 @@ import { ElMessage } from 'element-plus'
 import api from '@/services/api'
 
 export default {
-  name: 'Register',
+  name: 'RegisterView',
   setup() {
     const router = useRouter()
     const registerForm = ref(null)
@@ -117,6 +117,7 @@ export default {
         if (valid) {
           loading.value = true
           try {
+            // eslint-disable-next-line no-unused-vars
             const { confirmPassword, ...registerData } = formData
             await api.register(registerData)
             ElMessage.success('注册成功，请登录')
@@ -131,7 +132,7 @@ export default {
     }
 
     return {
-      registerForm,
+      registerFormRef: registerForm,
       registerForm: formData,
       rules,
       loading,

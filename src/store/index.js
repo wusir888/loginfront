@@ -27,10 +27,25 @@ export default createStore({
   },
   actions: {
     async login({ commit }, credentials) {
-      const response = await api.login(credentials)
-      const { token, username } = response.data
-      commit('setAuth', { token, username })
-      return response
+      try {
+        const response = await api.login(credentials)
+        console.log('登录响应:', response.data)
+        
+        // 根据您的后端API响应格式调整这里
+        // 假设响应格式为 { token: 'xxx', user: { username: 'xxx', ... } }
+        const token = response.data.token || response.data.accessToken
+        const username = response.data.user?.username || response.data.username
+        
+        if (!token) {
+          throw new Error('响应中没有找到token')
+        }
+        
+        commit('setAuth', { token, username })
+        return response
+      } catch (error) {
+        console.error('登录action错误:', error)
+        throw error
+      }
     },
     async register(_, userData) {
       return await api.register(userData)

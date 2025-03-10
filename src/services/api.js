@@ -5,7 +5,8 @@ const api = axios.create({
   baseURL: 'http://localhost:8080/api',
   headers: {
     'Content-Type': 'application/json'
-  }
+  },
+  withCredentials: true // 启用跨域凭证
 })
 
 // 请求拦截器添加token

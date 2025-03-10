@@ -20,7 +20,7 @@ import UserInfo from '@/components/UserInfo.vue'
 import api from '@/services/api'
 
 export default {
-  name: 'Profile',
+  name: 'ProfileView',
   components: {
     UserInfo
   },

@@ -3,7 +3,7 @@
     <div class="card">
       <h2>用户登录</h2>
       <el-form
-        ref="loginForm"
+        ref="loginFormRef"
         :model="loginForm"
         :rules="rules"
         label-width="80px"
@@ -36,11 +36,11 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 
 export default {
-  name: 'Login',
+  name: 'LoginView',
   setup() {
     const store = useStore()
     const router = useRouter()
-    const loginForm = ref(null)
+    const loginFormRef = ref(null)
     const loading = ref(false)
 
     const formData = reactive({
@@ -60,9 +60,9 @@ export default {
     }
 
     const handleLogin = async () => {
-      if (!loginForm.value) return
+      if (!loginFormRef.value) return
       
-      await loginForm.value.validate(async (valid) => {
+      await loginFormRef.value.validate(async (valid) => {
         if (valid) {
           loading.value = true
           try {
@@ -79,8 +79,8 @@ export default {
     }
 
     return {
-      loginForm,
       loginForm: formData,
+      loginFormRef,
       rules,
       loading,
       handleLogin

@@ -16,7 +16,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   setup() {
     const store = useStore()
     const isLoggedIn = computed(() => store.getters.isLoggedIn)
